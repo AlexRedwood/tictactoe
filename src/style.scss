@@ -1,5 +1,7 @@
 $font-color: #f8f8ff;
 $background-color: #555d50;
+$selection-background-color: #58505d;
+$selection-font-color: #f30c64;
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 body {
@@ -10,7 +12,6 @@ body {
 header {
   height: 25%;
   // background-color: cadetblue;
-  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,33 +21,80 @@ header {
     font-size: 2rem;
     letter-spacing: 3px;
     color: $font-color;
+    margin-top: 80px;
+
+    &::selection {
+      background-color: $selection-background-color;
+      color: $selection-font-color;
+    }
   }
 }
 
 .play-area {
   width: 100%;
   // background-color: chocolate;
+  flex-direction: column;
   display: flex;
   justify-content: center;
+  align-items: center;
 
+  .choice-container {
+    color: $font-color;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .change {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid $font-color;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: $font-color;
+      background-color: $background-color;
+
+      &::selection {
+        background-color: $selection-background-color;
+        color: $selection-font-color;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .choice {
+      display: inline-block;
+      min-width: 140px;
+      &::selection {
+        background-color: $selection-background-color;
+        color: $selection-font-color;
+      }
+    }
+  }
   .board {
     // background-color: cornsilk;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    width: 210px;
-    height: 210px;
+    width: 280px;
+    height: 280px;
 
-    .cell {
-      font-size: 1rem;
+    .cell-container {
+      font-size: 2rem;
       color: $font-color;
       cursor: pointer;
       height: calc(33.3333% - 2px);
       flex-basis: calc(33.3333% - 2px);
-      // background-color: antiquewhite;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: background-color 0.5s ease;
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.2);
@@ -61,6 +109,61 @@ header {
       &:nth-child(-n + 6) {
         border-bottom: 3px solid $font-color;
       }
+      .cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+
+        &::selection {
+          background-color: $selection-background-color;
+          color: $selection-font-color;
+        }
+      }
+    }
+  }
+
+  .message,
+  .reset {
+    margin-top: 4rem;
+    visibility: hidden;
+    color: $font-color;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    &::selection {
+      background-color: $selection-background-color;
+      color: $selection-font-color;
+    }
+  }
+
+  .reset {
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    letter-spacing: 5px;
+    color: $font-color;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid $font-color;
+    transition: box-shadow 0.5s ease, transform 0.4s ease,
+      background-color 0.5s ease, opacity 0.3s ease-in;
+
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
   }
 }

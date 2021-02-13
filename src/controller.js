@@ -1,13 +1,38 @@
-function initializeButtons() {
-  let buttons = document.getElementsByClassName("cell");
+function manageBtns(callback) {
+  let cells = document.getElementsByClassName("cell");
 
-  for (let button of buttons) {
-    button.addEventListener("click", initialize);
+  for (let cell of cells) {
+    cell.addEventListener("click", callback);
   }
 }
 
-function initialize(e) {
-  console.log(e.currentTarget.textContent);
+function removeCellListener(cellNumber, callback) {
+  let markedCell = document.getElementById(`cell-${cellNumber}`);
+  markedCell.removeEventListener("click", callback);
 }
 
-export default initializeButtons;
+function disableAllCells(callback) {
+  let cells = document.getElementsByClassName("cell");
+
+  for (let cell of cells) {
+    cell.removeEventListener("click", callback);
+  }
+}
+
+function manageReset(callback) {
+  let resetBtn = document.getElementsByClassName("reset")[0];
+  resetBtn.addEventListener("click", callback);
+}
+
+function manageChoice(callback) {
+  let choiceBtn = document.getElementsByClassName("change")[0];
+  choiceBtn.addEventListener("click", callback);
+}
+
+export {
+  manageBtns,
+  removeCellListener,
+  disableAllCells,
+  manageReset,
+  manageChoice,
+};
